@@ -1,8 +1,6 @@
 package com.spj.booksms.service;
 
-import com.spj.booksms.model.Book;
-import com.spj.booksms.model.Orderform;
-import com.spj.booksms.model.Users;
+import com.spj.booksms.model.*;
 
 import java.util.List;
 
@@ -24,6 +22,18 @@ public interface ManageService {
     public boolean updateOrderForm(Orderform orderform);
     public Orderform queryOrderForm(String id);
     public List<Orderform> queryOrderFormList();
+
+    public boolean addCarousel(Carousel carousel);
+    public boolean deleteCarousel(String id);
+    public boolean updateCarousel(Carousel carousel);
+    public Carousel queryCarosuel(String id);
+    public List<Carousel> queryCarouselList();
+
+    public boolean addHotrecommend(Hotrecommend hotrecommend);
+    public boolean deleteHotrecommend(String id);
+    public boolean updateHotrecommend(Hotrecommend hotrecommend);
+    public  Hotrecommend queryHotrecommend(String id);
+    public List<Hotrecommend> queryHotrecommendList();
 
 
 }

@@ -1,11 +1,7 @@
 package com.spj.booksms.service.Impl;
 
-import com.spj.booksms.dao.BookDao;
-import com.spj.booksms.dao.OrderFormDao;
-import com.spj.booksms.dao.UsersDao;
-import com.spj.booksms.model.Book;
-import com.spj.booksms.model.Orderform;
-import com.spj.booksms.model.Users;
+import com.spj.booksms.dao.*;
+import com.spj.booksms.model.*;
 import com.spj.booksms.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +20,12 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private OrderFormDao orderFormDao;
+
+    @Autowired
+    private CarouselDao carouselDao;
+
+    @Autowired
+    private HotrecommendDao hotrecommendDao;
 
     @Override
     public boolean update(Users users) {
@@ -136,6 +138,117 @@ public class ManageServiceImpl implements ManageService {
     public List<Orderform> queryOrderFormList() {
         try {
             return orderFormDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    @Override
+    public boolean addCarousel(Carousel carousel) {
+        try {
+            carouselDao.save(carousel);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteCarousel(String id) {
+        try {
+            carouselDao.delete(carouselDao.getOne(id));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateCarousel(Carousel carousel) {
+        try {
+            carouselDao.save(carousel);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Carousel queryCarosuel(String id) {
+        try {
+            return carouselDao.getOne(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public boolean addHotrecommend(Hotrecommend hotrecommend) {
+        try {
+            hotrecommendDao.save(hotrecommend);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteHotrecommend(String id) {
+        try {
+            hotrecommendDao.delete(hotrecommendDao.getOne(id));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateHotrecommend(Hotrecommend hotrecommend) {
+        try {
+            hotrecommendDao.save(hotrecommend);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Hotrecommend queryHotrecommend(String id) {
+        try {
+            return hotrecommendDao.getOne(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Carousel> queryCarouselList() {
+        try {
+            return carouselDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Hotrecommend> queryHotrecommendList() {
+        try {
+            return hotrecommendDao.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
