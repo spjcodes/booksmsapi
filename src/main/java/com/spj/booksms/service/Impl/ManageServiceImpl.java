@@ -92,6 +92,16 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
+    public List<Book> queryBookListByType(String type) {
+        try {
+            return bookDao.getBooksByType(type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public boolean addOrderForm(Orderform orderform) {
         try {
             orderFormDao.save(orderform);
@@ -224,6 +234,8 @@ public class ManageServiceImpl implements ManageService {
         }
         return false;
     }
+
+
 
     @Override
     public Hotrecommend queryHotrecommend(String id) {

@@ -21,6 +21,13 @@ public class AdminAction  {
     @Autowired
     private ManageService manageService;
 
+    @PostMapping("getBooksListByType")
+    @ResponseBody
+    public List getBooksListByType(@RequestBody Book book){
+        return manageService.queryBookListByType(book.getBtype());
+    }
+
+
     @PostMapping("addUser")
     @ResponseBody
     public boolean adduser(@RequestBody Users users){
@@ -198,7 +205,7 @@ public class AdminAction  {
 
         try {
             //将内存中的文件写入磁盘
-            uploadfile.transferTo(new File(filePath+ newfile));
+            uploadfile.transferTo(new File(filePath + newfile));
             m.put("pic",newfile);
             System.out.println("新文件名为：" + newfile);
             return m;
