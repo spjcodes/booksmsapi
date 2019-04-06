@@ -10,4 +10,7 @@ import java.util.List;
 public interface BookDao extends JpaRepository<Book, String> {
     @Query("select b from Book b where b.btype=:btype")
     List<Book> getBooksByType(@Param("btype") String btype) ;
+
+//    @Query("select b from Book b where b.btype like 'gongfu' or 'modern'")
+//    List<Book> getnovelBooks(@Param("btype") String btype);
 }

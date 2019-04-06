@@ -101,6 +101,16 @@ public class ManageServiceImpl implements ManageService {
         return null;
     }
 
+//    @Override
+//    public List<Book> queryNovelList() {
+//        try {
+//            return bookDao.getnovelBooks();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
     @Override
     public boolean addOrderForm(Orderform orderform) {
         try {

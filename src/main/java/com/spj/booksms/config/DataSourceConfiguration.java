@@ -17,8 +17,8 @@ public class DataSourceConfiguration {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.sqlite.JDBC");
 //有空的话试试存成路径的
-        dataSourceBuilder.url("jdbc:sqlite:" + "F:\\j2eeProjecet\\project\\booksms\\DataBases\\booksms.sqlite");
-//        dataSourceBuilder.url("jdbc:sqlite:" + "booksms.sqlite");
+        dataSourceBuilder.url("jdbc:sqlite:" + "E:\\j2eetest\\booksmsapi\\DataBases\\booksms.sqlite");
+//        dataSourceBuilder.url("jdbc:sqlite:" + "booksms.db");
         dataSourceBuilder.type(SQLiteDataSource.class);
         return dataSourceBuilder.build();
     }

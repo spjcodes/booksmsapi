@@ -21,6 +21,12 @@ public class AdminAction  {
     @Autowired
     private ManageService manageService;
 
+//    @GetMapping("getNovelList")
+//    @ResponseBody
+//    public List getNovelList(){
+//     return manageService.queryNovelList();
+//    }
+
     @PostMapping("getBooksListByType")
     @ResponseBody
     public List getBooksListByType(@RequestBody Book book){
