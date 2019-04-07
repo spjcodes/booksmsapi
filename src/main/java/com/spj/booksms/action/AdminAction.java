@@ -209,7 +209,6 @@ public class AdminAction  {
         if(!tf.exists()){
             tf.mkdir();
         }
-
         try {
             //将内存中的文件写入磁盘
             uploadfile.transferTo(new File(filePath + newfile));
@@ -219,7 +218,36 @@ public class AdminAction  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+
+    @RequestMapping("/ckeditorUpload")
+    @ResponseBody
+    public String ckeditorUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
+        if (!file.isEmpty()) {
+            String finename=file.getOriginalFilename();
+            String suffixname=file.getOriginalFilename().substring(finename.lastIndexOf("."));
+            finename=String.valueOf(System.currentTimeMillis())+suffixname;
+            String filepath="d:/springbootupload/";
+            File tf=new File(filepath);
+            if(!tf.exists()){
+                tf.mkdir();
+            }
+
+            String savefile=filepath+finename;
+            try {
+                file.transferTo(new File(savefile));
+                String url="http://localhost:8082/"+finename;
+                return "{\"uploaded\":1,\"fileName\":\""+savefile+"\",\"url\":\"" + url + "\"}";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
+            }
+        }
+        return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
     }
 }
