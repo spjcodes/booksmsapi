@@ -1,2 +1,7 @@
 server:
   port: 8081
+spring:
+  resources:
+    static-locations: file:D://booksmsCarouselImg//
+  mvc:
+    static-path-pattern: /**

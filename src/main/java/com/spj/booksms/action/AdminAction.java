@@ -204,14 +204,15 @@ public class AdminAction  {
         System.out.println("收到的文件名为： "+filename);
         String suffixname = uploadfile.getOriginalFilename().substring(filename.lastIndexOf("."));
         String newfile = String.valueOf(System.currentTimeMillis())+ suffixname;
-        String filePath = "d:/booksms/";
+        String filePath = "d:/booksmsFiles/";
         File tf = new File(filePath);
         if(!tf.exists()){
             tf.mkdir();
+   System.out.println("创建文件夹成功");
         }
         try {
             //将内存中的文件写入磁盘
-            uploadfile.transferTo(new File(filePath + newfile));
+            uploadfile.transferTo(new File(filePath+ newfile));
             m.put("pic",newfile);
             System.out.println("新文件名为：" + newfile);
             return m;
@@ -222,27 +223,27 @@ public class AdminAction  {
     }
 
 
-    @RequestMapping("/ckeditorUpload")
+    @RequestMapping("ckeditorUpload")
     @ResponseBody
     public String ckeditorUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
         if (!file.isEmpty()) {
             String finename=file.getOriginalFilename();
             String suffixname=file.getOriginalFilename().substring(finename.lastIndexOf("."));
             finename=String.valueOf(System.currentTimeMillis())+suffixname;
-            String filepath="d:/springbootupload/";
+            String filepath="d:/booksmsFiles/";
             File tf=new File(filepath);
             if(!tf.exists()){
                 tf.mkdir();
             }
-
             String savefile=filepath+finename;
             try {
                 file.transferTo(new File(savefile));
-                String url="http://localhost:8082/"+finename;
+                String url="http://localhost:8081/"+finename;
                 return "{\"uploaded\":1,\"fileName\":\""+savefile+"\",\"url\":\"" + url + "\"}";
             } catch (IOException e) {
                 e.printStackTrace();
                 return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
+
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
