@@ -17,7 +17,7 @@ public interface ManageService {
     public Book queryBook(String id);
     public List<Book> queryBookList();
     public List<Book> queryBookListByType(String Type);
-//    public List<Book> queryNovelList();
+    public List<Book> queryBooksByBstype(String bsType);
 
     public boolean addOrderForm(Orderform orderform);
     public boolean deleteOrderForm(String id);

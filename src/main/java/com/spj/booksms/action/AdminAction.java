@@ -21,17 +21,7 @@ public class AdminAction  {
     @Autowired
     private ManageService manageService;
 
-//    @GetMapping("getNovelList")
-//    @ResponseBody
-//    public List getNovelList(){
-//     return manageService.queryNovelList();
-//    }
 
-    @PostMapping("getBooksListByType")
-    @ResponseBody
-    public List getBooksListByType(@RequestBody Book book){
-        return manageService.queryBookListByType(book.getBtype());
-    }
 
 
     @PostMapping("addUser")
@@ -96,6 +86,17 @@ public class AdminAction  {
         return manageService.updateBook(book);
     }
 
+    @PostMapping("getBookListByBstype")
+    @ResponseBody
+    public List getBookListByBstype (@RequestBody Book book){
+        return this.manageService.queryBooksByBstype(book.getBstype());
+    }
+
+    @PostMapping("getBooksListByType")
+    @ResponseBody
+    public List getBooksListByType(@RequestBody Book book){
+        return manageService.queryBookListByType(book.getBtype());
+    }
 
 
 

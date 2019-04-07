@@ -101,6 +101,16 @@ public class ManageServiceImpl implements ManageService {
         return null;
     }
 
+    @Override
+    public List<Book> queryBooksByBstype(String bsType) {
+        try {
+            return bookDao.getBooksByBstype(bsType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 //    @Override
 //    public List<Book> queryNovelList() {
 //        try {

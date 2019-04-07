@@ -19,6 +19,7 @@ public class Book {
     private String bintro;
     private String btype;
     private Short bstar;
+    private String bstype;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
@@ -143,5 +144,15 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(bid, bname, bauthor, bversion, bimage, boldcost, bnewcost, bintro, btype, bstar);
+    }
+
+    @Basic
+    @Column(name = "bstype")
+    public String getBstype() {
+        return bstype;
+    }
+
+    public void setBstype(String bstype) {
+        this.bstype = bstype;
     }
 }
