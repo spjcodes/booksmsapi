@@ -21,7 +21,11 @@ public class AdminAction  {
     @Autowired
     private ManageService manageService;
 
-
+    @PostMapping("login")
+    @ResponseBody
+    public Users login(@RequestBody Users users){
+        return manageService.queryUserByUsernameAndPassword(users.getUsername(), users.getUpwd());
+    }
 
 
     @PostMapping("addUser")

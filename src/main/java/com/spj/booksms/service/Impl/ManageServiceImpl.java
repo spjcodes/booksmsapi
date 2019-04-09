@@ -102,6 +102,16 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
+    public Users queryUserByUsernameAndPassword(String username, String upassword) {
+        try {
+            return usersDao.findUserByUsernameAndPassword(username, upassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Book> queryBooksByBstype(String bsType) {
         try {
             return bookDao.getBooksByBstype(bsType);

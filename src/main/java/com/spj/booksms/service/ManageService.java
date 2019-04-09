@@ -10,6 +10,7 @@ public interface ManageService {
     public boolean deleteUser(String id);
     public Users queryUser(String id);
     public List<Users> queryUserList();
+    public Users queryUserByUsernameAndPassword(String username, String upassword);
 
     public boolean addBook(Book book);
     public boolean deleteBook(String id);
