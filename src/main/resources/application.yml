@@ -1,7 +1,9 @@
 server:
   port: 8081
 spring:
+  jpa:
+    show-sql: true
   resources:
-    static-locations: file:D://booksmsCarouselImg//
+    static-locations: file:d:/booksmsFiles/
   mvc:
     static-path-pattern: /**

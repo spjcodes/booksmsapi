@@ -217,7 +217,7 @@ public class AdminAction  {
         try {
             //将内存中的文件写入磁盘
             uploadfile.transferTo(new File(filePath+ newfile));
-            m.put("pic",newfile);
+            m.put("cimg",newfile);
             System.out.println("新文件名为：" + newfile);
             return m;
         } catch (IOException e) {

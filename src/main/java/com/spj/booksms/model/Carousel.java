@@ -13,6 +13,7 @@ public class Carousel {
     private String cname;
     private String cintro;
     private String ccontent;
+    private String cimg;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
@@ -71,5 +72,15 @@ public class Carousel {
     @Override
     public int hashCode() {
         return Objects.hash(cid, cname, cintro, ccontent);
+    }
+
+    @Basic
+    @Column(name = "cimg")
+    public String getCimg() {
+        return cimg;
+    }
+
+    public void setCimg(String cimg) {
+        this.cimg = cimg;
     }
 }
