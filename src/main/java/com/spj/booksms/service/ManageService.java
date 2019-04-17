@@ -38,5 +38,11 @@ public interface ManageService {
     public  Hotrecommend queryHotrecommend(String id);
     public List<Hotrecommend> queryHotrecommendList();
 
+    public boolean addShoppcart(Shoppingcart shoppingcart);
+    public boolean deleteShopcart(String id);
+    public boolean updateShopcart(Shoppingcart shoppingcart);
+    public List<Shoppingcart> queryShopcartList();
+    public Shoppingcart queryShopcart(String id);
+
 
 }

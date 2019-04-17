@@ -297,6 +297,65 @@ public class ManageServiceImpl implements ManageService {
         return null;
     }
 
+
+
+
+
+    @Autowired
+    private ShoppingcartDao shoppingcartDao;
+    @Override
+    public boolean addShoppcart(Shoppingcart shoppingcart) {
+        try {
+             shoppingcartDao.save(shoppingcart);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteShopcart(String id) {
+        try {
+            shoppingcartDao.delete(shoppingcartDao.getOne(id));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateShopcart(Shoppingcart shoppingcart) {
+        try {
+            shoppingcartDao.save(shoppingcart);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public List<Shoppingcart> queryShopcartList() {
+        try {
+            return shoppingcartDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Shoppingcart queryShopcart(String id) {
+        try {
+            return shoppingcartDao.getOne(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public boolean deleteUser(String id) {
         try {

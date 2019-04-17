@@ -17,6 +17,7 @@ public class Users {
     private String ugrade;
     private String urole;
     private String uaddress;
+    private String uimage;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
@@ -119,5 +120,15 @@ public class Users {
     @Override
     public int hashCode() {
         return Objects.hash(uid, username, upwd, umobile, udiscounts, ugrade, urole, uaddress);
+    }
+
+    @Basic
+    @Column(name = "uimage")
+    public String getUimage() {
+        return uimage;
+    }
+
+    public void setUimage(String uimage) {
+        this.uimage = uimage;
     }
 }

@@ -198,8 +198,6 @@ public class AdminAction  {
     public List<Hotrecommend> getHotrecommendList(){
         return manageService.queryHotrecommendList();
     }
-
-
     @PostMapping("uploadPic")
     @ResponseBody
     public Map upLoadPic(MultipartFile uploadfile){

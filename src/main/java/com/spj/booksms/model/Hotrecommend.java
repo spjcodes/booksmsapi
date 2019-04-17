@@ -14,6 +14,7 @@ public class Hotrecommend {
     private Short hstar;
     private String himage;
     private String hintro;
+    private Short hcost;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
@@ -83,5 +84,15 @@ public class Hotrecommend {
     @Override
     public int hashCode() {
         return Objects.hash(hid, hname, hstar, himage, hintro);
+    }
+
+    @Basic
+    @Column(name = "hcost")
+    public Short getHcost() {
+        return hcost;
+    }
+
+    public void setHcost(Short hcost) {
+        this.hcost = hcost;
     }
 }
