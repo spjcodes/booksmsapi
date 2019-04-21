@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 public interface UsersDao  extends JpaRepository<Users, String> {
     @Query("select u from Users u where u.username=:username and u.upwd=:upwd")
     public Users findUserByUsernameAndPassword(@Param("username") String username,
-                                              @Param("upwd") String upwd);
+                                               @Param("upwd") String upwd);
 
 
 
