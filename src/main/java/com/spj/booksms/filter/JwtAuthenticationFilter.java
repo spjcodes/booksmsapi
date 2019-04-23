@@ -25,8 +25,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * **匹配0个或多个目录
      */
     private static final PathMatcher pathmatcher = new AntPathMatcher();
-    //  定义需要校验(过滤）的URL 下面定义的路径都需要进行校验
-    private String[] protectUrlPattern = {"/manage/**", "/member/**", "/auth/**"};
+    //  定义需要校验(过滤）的URL 下面定义的路径都需要进行token校验
+    private String[] protectUrlPattern = {"/manage/**", "/member/**", "/auth/**","/alipay/**"};
 
     public JwtAuthenticationFilter() {
 
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //            11             Authentication request = new UsernamePasswordAuthenticationToken(name, password);
 //            12             // 将token传递给Authentication进行验证
 //            13             Authentication result = am.authenticate(request);
-//            14             SecurityContextHolder.getContext().setAuthentication(result);
+//            14             SecurityCont`extHolder.getContext().setAuthentication(result);
 //            15             break;
 //            16         } catch (AuthenticationException e) {
 //            17             System.out.println("认证失败：" + e.getMessage());

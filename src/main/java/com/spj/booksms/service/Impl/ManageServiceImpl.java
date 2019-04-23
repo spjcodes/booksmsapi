@@ -3,9 +3,14 @@ package com.spj.booksms.service.Impl;
 import com.spj.booksms.dao.*;
 import com.spj.booksms.model.*;
 import com.spj.booksms.service.ManageService;
+import com.spj.booksms.tools.AuthTools;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -26,6 +31,38 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private HotrecommendDao hotrecommendDao;
+
+
+    @Override
+    public String getCurrentUserId() {
+
+        String userid= (String) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+        if(AuthTools.isNullOrSpace(userid)){
+            return null;
+        }
+        else {
+            return userid;
+        }
+
+    }
+
+    @Override
+    public String getCurrentUserRole() {
+        String role=null;
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for (GrantedAuthority authority : authorities) {
+            role = authority.getAuthority();
+
+        }
+
+        if(AuthTools.isNullOrSpace(role)){
+            return null;
+        }
+        else{
+            return role;
+        }
+
+    }
 
     @Override
     public boolean update(Users users) {

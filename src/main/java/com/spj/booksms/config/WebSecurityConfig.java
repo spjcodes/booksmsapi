@@ -27,7 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //允许跨域访问添加
                 .antMatchers("/").authenticated()
-                .antMatchers("/public/**").permitAll()
+                //任何用户都可以访问
+                .antMatchers("/public/**", "/pic/**").permitAll()
+//               指定用户可以访问
+                //.antMatchers( "/admin/**").hasRole("ADMIN" )
+
                 .anyRequest().authenticated()
 
                 .and()

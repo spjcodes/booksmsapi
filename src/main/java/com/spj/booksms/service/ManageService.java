@@ -44,5 +44,8 @@ public interface ManageService {
     public List<Shoppingcart> queryShopcartList();
     public Shoppingcart queryShopcart(String id);
 
+    public String getCurrentUserId();
+    public String getCurrentUserRole();
+
 
 }
