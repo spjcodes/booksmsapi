@@ -1,6 +1,7 @@
 package com.spj.booksms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.solr.client.solrj.beans.Field;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,16 +10,27 @@ import java.util.Objects;
 @Entity
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Book {
+    @Field("bid")
     private String bid;
+     @Field("bname")
     private String bname;
+    @Field("bauthor")
     private String bauthor;
+    @Field("bversion")
     private String bversion;
+    @Field("bimage")
     private String bimage;
+    @Field("boldcost")
     private Short boldcost;
+    @Field("bnewcost")
     private Short bnewcost;
+    @Field("bintro")
     private String bintro;
+    @Field("btype")
     private String btype;
+    @Field("bstar")
     private Short bstar;
+    @Field("bstype")
     private String bstype;
 
     @Id

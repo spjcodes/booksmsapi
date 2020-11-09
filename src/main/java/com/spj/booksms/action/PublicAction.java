@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@CrossOrigin
 @RequestMapping("public")
+@CrossOrigin
 public class PublicAction
 {
     @Autowired
@@ -185,3 +185,6 @@ public class PublicAction
 
 
 }
+
+
+

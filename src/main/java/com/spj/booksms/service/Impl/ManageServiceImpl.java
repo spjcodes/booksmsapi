@@ -4,6 +4,8 @@ import com.spj.booksms.dao.*;
 import com.spj.booksms.model.*;
 import com.spj.booksms.service.ManageService;
 import com.spj.booksms.tools.AuthTools;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.common.SolrDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,6 +33,9 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private HotrecommendDao hotrecommendDao;
+
+    @Autowired
+    private SolrClient solrClient;
 
 
     @Override
@@ -65,6 +70,11 @@ public class ManageServiceImpl implements ManageService {
     }
 
     @Override
+    public String getUserIdByUserInfo(Users users) {
+        return this.usersDao.getUerIdByUserInfo(users.getUsername(), users.getUpwd());
+    }
+
+    @Override
     public boolean update(Users users) {
         try {
             usersDao.save(users);
@@ -79,6 +89,8 @@ public class ManageServiceImpl implements ManageService {
     public boolean addBook(Book book) {
         try {
             bookDao.save(book);
+            solrClient.addBean(book);
+            solrClient.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,6 +102,8 @@ public class ManageServiceImpl implements ManageService {
     public boolean deleteBook(String id) {
         try {
             bookDao.delete(bookDao.getOne(id));
+            solrClient.deleteById(id);
+            solrClient.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,6 +115,9 @@ public class ManageServiceImpl implements ManageService {
     public boolean updateBook(Book book) {
         try {
             bookDao.save(book);
+            solrClient.deleteById(book.getBid());
+            solrClient.addBean(book);
+            solrClient.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

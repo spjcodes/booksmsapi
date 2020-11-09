@@ -1,5 +1,6 @@
 package com.spj.booksms.action;
 
+import com.spj.booksms.model.Users;
 import com.spj.booksms.service.ManageService;
 import com.spj.booksms.tools.AuthTools;
 import com.spj.booksms.tools.JwtUtil;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -41,6 +43,15 @@ public class AuthAction {
 
     }
 
+
+    @PostMapping("getUserIdByUserInfo")
+    @ResponseBody
+    public HashMap getUserIdByUserInfo(@RequestBody Users users) {
+        String id = this.manageService.getUserIdByUserInfo(users);
+        return new HashMap() {{
+            put("id", id);
+        }};
+    }
 
     @GetMapping("getRole")
     @ResponseBody

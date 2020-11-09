@@ -48,4 +48,5 @@ public interface ManageService {
     public String getCurrentUserRole();
 
 
+    String getUserIdByUserInfo(Users users);
 }

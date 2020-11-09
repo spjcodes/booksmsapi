@@ -12,6 +12,8 @@ public interface UsersDao  extends JpaRepository<Users, String> {
                                                @Param("upwd") String upwd);
 
 
-
+    @Query("select u.uid from Users  u where u.username=:username and u.upwd=:upwd")
+    String getUerIdByUserInfo(@Param("username") String username,
+                              @Param("upwd") String upwd);
 }
 
