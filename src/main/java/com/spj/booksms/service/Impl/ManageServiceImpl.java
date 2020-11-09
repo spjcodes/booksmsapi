@@ -91,8 +91,8 @@ public class ManageServiceImpl implements ManageService {
             SolrDocumentList results = response.getResults();
             for (SolrDocument e : results) {
                 Book book = new Book();
-                Object bid = e.getFieldValue("id");
-                book.setBid(String.valueOf(bid));
+                Object bid = e.getFieldValue("bid");
+                book.setBid(String.valueOf(bid).substring(1,bid.toString().length()-1));
                 Object bname = e.getFieldValue("bname");
                 book.setBname(String.valueOf(bname).substring(1,bname.toString().length()-1));
                 Object bauthor = e.getFieldValue("bauthor");
@@ -105,19 +105,19 @@ public class ManageServiceImpl implements ManageService {
                 book.setBoldcost( Short.valueOf(oldcost.toString().substring(1, oldcost.toString().length()-3)));
 
                 Object newcost = e.getFieldValue("bnewcost");
-                book.setBnewcost(Short.valueOf(newcost.toString().substring(1, oldcost.toString().length()-3)));
+                book.setBnewcost(Short.valueOf(newcost.toString().substring(1, oldcost.toString().length()-4)));
                 Object bintro = e.getFieldValue("bintro");
                 book.setBintro(String.valueOf(bintro));
                 Object btype = e.getFieldValue("btype");
                 book.setBtype(String.valueOf(btype).substring(1, btype.toString().length()-1));
                 Object star = e.getFieldValue("bstar");
-                book.setBstar(Short.valueOf(star.toString().substring(1, oldcost.toString().length()-4)));
+                book.setBstar(Short.valueOf(star.toString().substring(1, oldcost.toString().length()-5)));
                 Object bstype = e.getFieldValue("bstype");
                 book.setBstype(String.valueOf(bstype).substring(1, bstype.toString().length()-1));
 
                 books.add(book);
             }
-        } catch (SolrServerException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -138,8 +138,8 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public boolean addBook(Book book) {
         try {
-            bookDao.save(book);
-            solrClient.addBean(book);
+            Book save = bookDao.save(book);
+            solrClient.addBean(save);
             solrClient.commit();
             return true;
         } catch (Exception e) {
