@@ -49,4 +49,6 @@ public interface ManageService {
 
 
     String getUserIdByUserInfo(Users users);
+
+    List<Book> getBooksBySolrEngine(String keyWorld);
 }

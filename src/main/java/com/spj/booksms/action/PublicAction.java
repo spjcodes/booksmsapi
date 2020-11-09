@@ -61,6 +61,12 @@ public class PublicAction
         return manageService.queryUserList();
     }
 
+    @PostMapping("getBooksBySolrEngine")
+    @ResponseBody
+    public List<Book> getBooksBySolrEngine( String keyWorld){
+        return manageService.getBooksBySolrEngine(keyWorld);
+    }
+
     @PostMapping("getBook")
     @ResponseBody
     public Book getBook(@RequestBody Book book){

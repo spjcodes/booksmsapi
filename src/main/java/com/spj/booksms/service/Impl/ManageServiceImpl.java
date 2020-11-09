@@ -5,13 +5,21 @@ import com.spj.booksms.model.*;
 import com.spj.booksms.service.ManageService;
 import com.spj.booksms.tools.AuthTools;
 import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -72,6 +80,48 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public String getUserIdByUserInfo(Users users) {
         return this.usersDao.getUerIdByUserInfo(users.getUsername(), users.getUpwd());
+    }
+
+    @Override
+    public List<Book> getBooksBySolrEngine(String keyWorld) {
+        List<Book> books = new ArrayList<>();
+        try {
+            SolrQuery params =new SolrQuery("bname:" + keyWorld);
+            QueryResponse response = solrClient.query(params);
+            SolrDocumentList results = response.getResults();
+            for (SolrDocument e : results) {
+                Book book = new Book();
+                Object bid = e.getFieldValue("id");
+                book.setBid(String.valueOf(bid));
+                Object bname = e.getFieldValue("bname");
+                book.setBname(String.valueOf(bname).substring(1,bname.toString().length()-1));
+                Object bauthor = e.getFieldValue("bauthor");
+                book.setBauthor(String.valueOf(bauthor).substring(1, bauthor.toString().length()-1));
+                Object bversio = e.getFieldValue("bversion");
+                book.setBversion(String.valueOf(bversio).substring(1, bversio.toString().length()-1));
+                Object bimage = e.getFieldValue("bimage");
+                book.setBimage(String.valueOf(bimage).substring(1, bimage.toString().length()-1));
+                Object oldcost = e.getFieldValue("boldcost");
+                book.setBoldcost( Short.valueOf(oldcost.toString().substring(1, oldcost.toString().length()-3)));
+
+                Object newcost = e.getFieldValue("bnewcost");
+                book.setBnewcost(Short.valueOf(newcost.toString().substring(1, oldcost.toString().length()-3)));
+                Object bintro = e.getFieldValue("bintro");
+                book.setBintro(String.valueOf(bintro));
+                Object btype = e.getFieldValue("btype");
+                book.setBtype(String.valueOf(btype).substring(1, btype.toString().length()-1));
+                Object star = e.getFieldValue("bstar");
+                book.setBstar(Short.valueOf(star.toString().substring(1, oldcost.toString().length()-4)));
+                Object bstype = e.getFieldValue("bstype");
+                book.setBstype(String.valueOf(bstype).substring(1, bstype.toString().length()-1));
+
+                books.add(book);
+            }
+        } catch (SolrServerException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return books;
     }
 
     @Override
