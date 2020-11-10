@@ -11,10 +11,12 @@ import java.util.Objects;
 public class Orderform {
     private String oid;
     private String obook;
-    private Short ocost;
+    private Short  ocost;
+    //供应商
     private String ovendor;
-    private String opurchaser;
-    private Long obuytime;
+    //购买者
+    private String  opurchaser;
+    private  Long   obuytime;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称

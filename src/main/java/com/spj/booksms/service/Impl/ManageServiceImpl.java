@@ -6,19 +6,15 @@ import com.spj.booksms.service.ManageService;
 import com.spj.booksms.tools.AuthTools;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.params.ModifiableSolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -122,6 +118,11 @@ public class ManageServiceImpl implements ManageService {
         }
 
         return books;
+    }
+
+    @Override
+    public List<Orderform> getOrderFormListByUser(String id) {
+        return orderFormDao.getOrderFormListByUser(id);
     }
 
     @Override
@@ -238,6 +239,7 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public boolean addOrderForm(Orderform orderform) {
         try {
+            orderform.setObuytime(System.currentTimeMillis());
             orderFormDao.save(orderform);
             return true;
         } catch (Exception e) {

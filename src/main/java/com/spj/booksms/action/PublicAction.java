@@ -92,6 +92,12 @@ public class PublicAction
         return manageService.queryBookListByType(book.getBtype());
     }
 
+    @PostMapping("deleteOrderFormById")
+    @ResponseBody
+    public boolean deleteOrderForm(@RequestBody Orderform orderform){
+        return manageService.deleteOrderForm(orderform.getOid());
+    }
+
     @PostMapping("getOrderForm")
     @ResponseBody
     public Orderform getOrderForm(@RequestBody Orderform orderform){
@@ -102,6 +108,12 @@ public class PublicAction
     @ResponseBody
     public List<Orderform> getOrderForm(){
         return manageService.queryOrderFormList();
+    }
+
+    @PostMapping("getOrderFormListByUser")
+    @ResponseBody
+    public List<Orderform> getOrderFormListByUser(@RequestBody Orderform orderform){
+        return manageService.getOrderFormListByUser(orderform.getOpurchaser());
     }
 
     @PostMapping("getCarousel")
